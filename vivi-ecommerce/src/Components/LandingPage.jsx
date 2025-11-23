@@ -1,8 +1,8 @@
 import React from 'react'
 import './style.css'
-import f1 from './img/f1.jpg';
-import f2 from './img/f2.jpg';
-import f3 from './img/f3.jpg';
+// import f1 from './img/f1.jpg';
+// import f2 from './img/f2.jpg';
+// import f3 from './img/f3.jpg';
 
 function LandingPage() {
   return (
@@ -36,7 +36,7 @@ function LandingPage() {
         <div class="modal-content">
             <button class="close-modal" onclick="closeModal()">×</button>
             <div class="modal-body" id="modalBody">
-                <!-- Product details will be injected here
+                {/* Product details will be injected here */}
             </div>
         </div>
     </div>
@@ -44,7 +44,7 @@ function LandingPage() {
     <header class="nav">
         <div class="logo">Mixtas</div>
         
-        <!-- Mobile Menu Toggle -->
+        {/* Mobile Menu Toggle */}
         <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
             <span></span>
             <span></span>
@@ -68,14 +68,14 @@ function LandingPage() {
             <div class="badge icon-btn cart-btn" onclick="openCart()">0</div>
         </div>
         
-        <!-- Search Bar -->
+        {/* Search Bar */}
         <div class="search-bar" id="searchBar">
-            <input type="text" placeholder="Search products..." id="searchInput">
+            <input type="text" placeholder="Search products..." id="searchInput"/>
             <button class="search-close" onclick="toggleSearch()">×</button>
         </div>
     </header>
 
-    <!-- Mobile Menu Overlay -->
+    {/* Mobile Menu Overlay */}
     <div class="mobile-menu-overlay" id="mobileMenuOverlay">
         <nav class="mobile-menu">
             <a href="#" class="active" onclick="closeMobileMenu()">Home</a>
@@ -97,7 +97,7 @@ function LandingPage() {
         <div class="hero-inner">
             <div class="hero-left">
                 <div class="label">URBAN EDGE</div>
-                <h1>Jackets for the<br>Modern Man</h1>
+                <h1>Jackets for the<br/>Modern Man</h1>
                 <p class="small">Discover a fresh selection of jackets — crafted for contemporary comfort and style.</p>
                 <a href="#new-arrivals" class="cta">Discover Now</a>
             </div>
@@ -107,7 +107,7 @@ function LandingPage() {
     <section class="section" id="new-arrivals">
         <h2>New Arrivals</h2>
         
-        <!-- Category Tabs -->
+        {/* Category Tabs */}
         <div class="tabs">
             <div class="tab active" data-category="all">ALL</div>
             <div class="tab" data-category="women">WOMEN</div>
@@ -117,11 +117,11 @@ function LandingPage() {
             <div class="tab" data-category="accessories">ACCESSORIES</div>
         </div>
 
-        <!-- Product Grid -->
+        {/* Product Grid */}
         <div class="grid">
             <div class="card" data-category="men">
                 <div class="img">
-                    <img src="./img/f3.jpg" alt="Adidas X Pop Polo Shirt">
+                    <img src="./img/f3.jpg" alt="Adidas X Pop Polo Shirt"/>
                     <button class="favorite-btn" onclick="toggleFavorite(this)">♡</button>
                 </div>
                 <div class="title">JACKETS<span class="small">adidas X Pop Polo shirt, navy / blue</span></div>
@@ -134,7 +134,7 @@ function LandingPage() {
 
             <div class="card" data-category="men">
                 <div class="img">
-                    <img src="./img/f2.jpg" alt="Adidas X Pop TRX Vintage">
+                    <img src="./img/f2.jpg" alt="Adidas X Pop TRX Vintage"/>
                     <button class="favorite-btn" onclick="toggleFavorite(this)">♡</button>
                 </div>
                 <div class="title">JACKETS<span class="small">adidas X Pop TRX Vintage, navy / white</span></div>
@@ -147,7 +147,7 @@ function LandingPage() {
 
             <div class="card" data-category="men">
                 <div class="img">
-                    <img src="./img/f1.jpg" alt="Adidas X Pop Beckenbauer Track Jacket">
+                    <img src="./img/f1.jpg" alt="Adidas X Pop Beckenbauer Track Jacket"/>
                     <button class="favorite-btn" onclick="toggleFavorite(this)">♡</button>
                 </div>
                 <div class="title">JACKETS<span class="small">adidas X Pop Beckenbauer Track Jacket</span></div>
@@ -225,7 +225,7 @@ function LandingPage() {
             </div>
         </div>
 
-        <!-- Promotional Banners -->
+        {/* Promotional Banners */}
         <div class="promo-wrap">
             <div class="promo-left">
                 <div class="promo" style="background:#f8f5e6">
@@ -248,13 +248,13 @@ function LandingPage() {
         </div>
     </section>
 
-    <!-- Newsletter Section -->
+    {/* Newsletter Section */}
     <section class="newsletter">
         <div class="newsletter-content">
             <h3>Stay Updated</h3>
             <p>Subscribe to get special offers, free giveaways, and new arrivals</p>
             <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
-                <input type="email" placeholder="Enter your email" required>
+                <input type="email" placeholder="Enter your email" required/>
                 <button type="submit">Subscribe</button>
             </form>
         </div>
