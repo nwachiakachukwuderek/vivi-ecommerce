@@ -13,7 +13,9 @@ function LandingPage() {
     setCartNumber(cartNumber + 1)
   }
 
-  console.log(products.id)
+  products.map((item) => {
+    console.log(item)
+  })
 
   return (
     <>
@@ -128,111 +130,23 @@ function LandingPage() {
         </div>
 
         {/* Product Grid */}
-        <div className="grid">
-            <div className="card" data-category="men">
-                <div className="img">
-                    <img src="./img/f3.jpg" alt="Adidas X Pop Polo Shirt"/>
-                    <button className="favorite-btn">♡</button>
+
+        <div className='grid'>
+            {products.map((item) => (
+              <div className='card' key={item.id}>
+                <div>
+                  <img src={item.image} alt={item.description} />
+                  <button className='favorite-btn'>♡</button>
                 </div>
-                <div className="title">JACKETS<span className="small">adidas X Pop Polo shirt, navy / blue</span></div>
-                <div className="price">$69.99</div>
+                <div className="title">JACKETS<span className="small">{item.name}</span></div>
+                <div className="price">{item.price}</div>
                 <div className="card-actions">
                     <button className="quick-view-btn">Quick View</button>
                     <button className="add-to-cart">Add to Cart</button>
                 </div>
-            </div>
 
-            <div className="card" data-category="men">
-                <div className="img">
-                    <img src="./img/f2.jpg" alt="Adidas X Pop TRX Vintage"/>
-                    <button className="favorite-btn">♡</button>
-                </div>
-                <div className="title">JACKETS<span className="small">adidas X Pop TRX Vintage, navy / white</span></div>
-                <div className="price">$69.99</div>
-                <div className="card-actions">
-                    <button className="quick-view-btn">Quick View</button>
-                    <button className="add-to-cart">Add to Cart</button>
-                </div>
-            </div>
-
-            <div className="card" data-category="men">
-                <div className="img">
-                    <img src="./img/f1.jpg" alt="Adidas X Pop Beckenbauer Track Jacket"/>
-                    <button className="favorite-btn">♡</button>
-                </div>
-                <div className="title">JACKETS<span className="small">adidas X Pop Beckenbauer Track Jacket</span></div>
-                <div className="price">$129.00</div>
-                <div className="card-actions">
-                    <button className="quick-view-btn">Quick View</button>
-                    <button className="add-to-cart">Add to Cart</button>
-                </div>
-            </div>
-
-            <div className="card" data-category="women">
-                <div className="img">
-                    <div className="skeleton" style={{width:"100%", height:"140px"}}></div>
-                    <button className="favorite-btn">♡</button>
-                </div>
-                <div className="title">JACKETS<span className="small">adidas X Pop classNameic t-shirt, grey / navy</span></div>
-                <div className="price">$120.00</div>
-                <div className="card-actions">
-                    <button className="quick-view-btn" >Quick View</button>
-                    <button className="add-to-cart">Add to Cart</button>
-                </div>
-            </div>
-
-            <div className="card" data-category="accessories">
-                <div className="img">
-                    <div className="skeleton" style={{width:"100%", height:"140px"}}></div>
-                    <button className="favorite-btn">♡</button>
-                </div>
-                <div className="title">JACKETS<span className="small">adidas X Pop SL Cap, navy / white</span></div>
-                <div className="price">$59.00</div>
-                <div className="card-actions">
-                    <button className="quick-view-btn">Quick View</button>
-                    <button className="add-to-cart">Add to Cart</button>
-                </div>
-            </div>
-
-            <div className="card" data-category="women">
-                <div className="img">
-                    <div className="skeleton" style={{width:"100%", height:"140px"}}></div>
-                    <button className="favorite-btn">♡</button>
-                </div>
-                <div className="title">JACKETS<span className="small">Butter Yard Pullover Hood, denim</span></div>
-                <div className="price">$120.00</div>
-                <div className="card-actions">
-                    <button className="quick-view-btn">Quick View</button>
-                    <button className="add-to-cart">Add to Cart</button>
-                </div>
-            </div>
-
-            <div className="card" data-category="men">
-                <div className="img">
-                    <div className="skeleton" style={{width:"100%", height:"140px"}}></div>
-                    <button className="favorite-btn">♡</button>
-                <div className="sale-badge">SALE</div>
-                </div>
-                <div className="title">JACKETS<span className="small">Parra Rug Pull t-shirt, white</span></div>
-                <div className="price">$60.00 <span className="original-price">$80.00</span></div>
-                <div className="card-actions">
-                    <button className="quick-view-btn">Quick View</button>
-                    <button className="add-to-cart">Add to Cart</button>
-                </div>
-            </div>
-
-            <div className="card" data-category="men">
-                <div className="img">
-                    <div className="skeleton" style={{width:"100%", height:"140px"}}></div>
-                    <button className="favorite-btn">♡</button>
-                </div>
-                <div className="title">JACKETS<span className="small">Carhartt L/S DeadKebab Knock Knock Sweat</span></div>
-                <div className="price">$130.00</div>
-                <div className="card-actions">
-                    <button className="quick-view-btn">Quick View</button>
-                    <button className="add-to-cart">Add to Cart</button>
-                </div>
-            </div>
+              </div>
+            ))}
         </div>
 
         {/* Promotional Banners */}

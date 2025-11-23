@@ -23,7 +23,7 @@
       "id": 4, 
       "name": "Adidas X Pop Classic T-shirt", 
       "price": 120.00, 
-      "image": "", 
+      "image": "kugvkluhvljkgvlj", 
       "description": "adidas X Pop Classic t-shirt, grey / navy" },
     { 
       "id": 5, "name": "Adidas X Pop SL Cap", 
@@ -34,7 +34,7 @@
       "id": 6, 
       "name": "Butter Yard Pullover Hood", 
       "price": 120.00, 
-      "image": "", 
+      "image": "kuhvkuhvkugv", 
       "description": "Butter Yard Pullover Hood, denim" },
     { 
       "id": 7, 
@@ -46,6 +46,6 @@
     "id": 8, 
     "name": "Carhartt L/S Sweat", 
     "price": 130.00, 
-    "image": "", 
+    "image": "kjhblvihvlhiv", 
     "description": "Carhartt L/S DeadKebab Knock Knock Sweat" }
     ]
