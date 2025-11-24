@@ -1,163 +1,168 @@
 import React, { useState } from 'react'
 import './style.css'
-// import f1 from './img/f1.jpg';
-// import f2 from './img/f2.jpg';
-// import f3 from './img/f3.jpg';
 import products from './products.json'
+import Notification from './Notification'
 
 function LandingPage() {
-  const [cartNumber, setCartNumber] = useState(2)
-  // const [index, setIndex] = useState(0)
+  const [cartNumber, setCartNumber] = useState(0);
+  const [notification, setNotification] = useState(null); 
+  const [isActive, setIsActive] = useState(false);
+  const [favorites, setFavorites] = useState(new Set());
+
+  function showNotification(message) {
+    setNotification(message);
+  }
 
   function updateCart() {
-    setCartNumber(cartNumber + 1)
+    setCartNumber(prev => prev + 1)
+    showNotification('Product added to cart!')
   }
+
+  function toggleFavorite(id)  {
+    const updatedFavorites = new Set(favorites);
+    if (updatedFavorites.has(id)) {
+        updatedFavorites.delete(id);
+    } else {
+        updatedFavorites.add(id);
+    }
+    setFavorites(updatedFavorites);
+  };
+
+  const baseClass = 'cart-overlay'
+  const openCart = isActive ? `active ${baseClass}` : baseClass
 
   return (
     <>
-        {/* Cart Sidebar  */}
-           {/* Cart Sidebar */}
-    <div id="cartOverlay" className="cart-overlay">
-        <div className="cart-sidebar">
-            <div className="cart-header">
-                <h3>Your Cart (<span id="cartCount">0</span>)</h3>
-                <button className="close-cart">×</button>
+        {/* Cart Sidebar */}
+        <div id="cartOverlay" className={openCart}>
+            <div className="cart-sidebar">
+                <div className="cart-header">
+                    <h3>Your Cart (<span id="cartCount">0</span>)</h3>
+                    <button className="close-cart" onClick={() => setIsActive(false)}>×</button>
+                </div>
+                
+                <div className="cart-items" id="cartItems">
+                    <p className="empty-cart">Your cart is empty</p>
+                </div>
+                
+                <div className="cart-footer">
+                    <div className="cart-total">
+                        <strong>Total: $<span id="cartTotal">0.00</span></strong>
+                    </div>
+                    <button className="checkout-btn">
+                        Proceed to Checkout
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        {/* Quick View Modal */}
+        <div id="productModal" className="modal-overlay">
+            <div className="modal-content">
+                <button className="close-modal">×</button>
+                <div className="modal-body" id="modalBody">
+                    {/* Product details will be injected here */}
+                </div>
+            </div>
+        </div>
+
+        <header className="nav">
+            <div className="logo">Mixtas</div>
+            
+            {/* Mobile Menu Toggle */}
+            <button className="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav className="menu" id="mainMenu">
+                <a href="#" className="active">Home</a>
+                <a href="#shop">Shop</a>
+                <a href="#new-arrivals">New Arrivals</a>
+                <a href="#blog">Blog</a>
+                <a href="#contact">Contact Us</a>
+            </nav>
+            
+            <div className="icons">
+                <div className="small icon-btn search-btn">🔍</div>
+                <div className="small icon-btn favorite-btn">
+                    ♡ <span className="favorite-count">{favorites.size}</span>
+                </div>
+                <div className="small icon-btn">👤</div>
+                <div className="badge icon-btn cart-btn" onClick={() => setIsActive(true)}>{cartNumber}</div>
             </div>
             
-            <div className="cart-items" id="cartItems">
-                <p className="empty-cart">Your cart is empty</p>
+            {/* Search Bar */}
+            <div className="search-bar" id="searchBar">
+                <input type="text" placeholder="Search products..." id="searchInput"/>
+                <button className="search-close">×</button>
             </div>
+        </header>
+
+        {/* Mobile Menu Overlay */}
+        <div className="mobile-menu-overlay" id="mobileMenuOverlay">
+            <nav className="mobile-menu">
+                <a href="#" className="active">Home</a>
+                <a href="#shop">Shop</a>
+                <a href="#new-arrivals">New Arrivals</a>
+                <a href="#blog">Blog</a>
+                <a href="#contact">Contact Us</a>
+                
+                <div className="mobile-menu-icons">
+                    <div className="icon-btn">🔍 Search</div>
+                    <div className="icon-btn">♡ Favorites</div>
+                    <div className="icon-btn">👤 Account</div>
+                    <div className="icon-btn">🛒 Cart (<span className="cart-badge-mobile">{cartNumber}</span>)</div>
+                </div>
+            </nav>
+        </div>
+
+        <section className="hero">
+            <div className="hero-inner">
+                <div className="hero-left">
+                    <div className="label">URBAN EDGE</div>
+                    <h1>Jackets for the<br/>Modern Man</h1>
+                    <p className="small">Discover a fresh selection of jackets — crafted for contemporary comfort and style.</p>
+                    <a href="#new-arrivals" className="cta">Discover Now</a>
+                </div>
+            </div>
+        </section>
+
+        <section className="section" id="new-arrivals">
+            <h2>New Arrivals</h2>
             
-            <div className="cart-footer">
-                <div className="cart-total">
-                    <strong>Total: $<span id="cartTotal">0.00</span></strong>
-                </div>
-                <button className="checkout-btn">
-                    Proceed to Checkout
-                </button>
+            {/* Category Tabs */}
+            <div className="tabs">
+                <div className="tab active" data-category="all">ALL</div>
+                <div className="tab" data-category="women">WOMEN</div>
+                <div className="tab" data-category="men">MEN</div>
+                <div className="tab" data-category="shoes">SHOES</div>
+                <div className="tab" data-category="bags">BAGS</div>
+                <div className="tab" data-category="accessories">ACCESSORIES</div>
             </div>
-        </div>
-    </div>
 
-    {/* Quick View Modal */}
-    <div id="productModal" className="modal-overlay">
-        <div className="modal-content">
-            <button className="close-modal">×</button>
-            <div className="modal-body" id="modalBody">
-                {/* Product details will be injected here */}
-            </div>
-        </div>
-    </div>
-
-    <header className="nav">
-        <div className="logo">Mixtas</div>
-        
-        {/* Mobile Menu Toggle */}
-        <button className="mobile-menu-toggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-
-        <nav className="menu" id="mainMenu">
-            <a href="#" className="active">Home</a>
-            <a href="#shop">Shop</a>
-            <a href="#new-arrivals">New Arrivals</a>
-            <a href="#blog">Blog</a>
-            <a href="#contact">Contact Us</a>
-        </nav>
-        
-        <div className="icons">
-            <div className="small icon-btn search-btn">🔍</div>
-            <div className="small icon-btn favorite-btn">
-                ♡ <span className="favorite-count">0</span>
-            </div>
-            <div className="small icon-btn">👤</div>
-            <div className="badge icon-btn cart-btn">{cartNumber}</div>
-        </div>
-        
-        {/* Search Bar */}
-        <div className="search-bar" id="searchBar">
-            <input type="text" placeholder="Search products..." id="searchInput"/>
-            <button className="search-close">×</button>
-        </div>
-    </header>
-
-    {/* Mobile Menu Overlay */}
-    <div className="mobile-menu-overlay" id="mobileMenuOverlay">
-        <nav className="mobile-menu">
-            <a href="#" className="active">Home</a>
-            <a href="#shop">Shop</a>
-            <a href="#new-arrivals">New Arrivals</a>
-            <a href="#blog">Blog</a>
-            <a href="#contact">Contact Us</a>
-            
-            <div className="mobile-menu-icons">
-                <div className="icon-btn" >🔍 Search</div>
-                <div className="icon-btn">♡ Favorites</div>
-                <div className="icon-btn">👤 Account</div>
-                <div className="icon-btn">🛒 Cart (<span className="cart-badge-mobile">0</span>)</div>
-            </div>
-        </nav>
-    </div>
-
-    <section className="hero">
-        <div className="hero-inner">
-            <div className="hero-left">
-                <div className="label">URBAN EDGE</div>
-                <h1>Jackets for the<br/>Modern Man</h1>
-                <p className="small">Discover a fresh selection of jackets — crafted for contemporary comfort and style.</p>
-                <a href="#new-arrivals" className="cta">Discover Now</a>
-            </div>
-        </div>
-    </section>
-
-    <section className="section" id="new-arrivals">
-        <h2>New Arrivals</h2>
-        
-        {/* Category Tabs */}
-        <div className="tabs">
-            <div className="tab active" data-category="all">ALL</div>
-            <div className="tab" data-category="women">WOMEN</div>
-            <div className="tab" data-category="men">MEN</div>
-            <div className="tab" data-category="shoes">SHOES</div>
-            <div className="tab" data-category="bags">BAGS</div>
-            <div className="tab" data-category="accessories">ACCESSORIES</div>
-        </div>
-
-        {/* Product Grid */}
-
-        <div className='grid'>
-            {products.map((item) => (
-              <div className='card' key={item.id}>
-                <div>
-                  <img src={item.image} alt={item.description} />
-                  <button className='favorite-btn'>♡</button>
-                </div>
-                <div className="title">JACKETS<span className="small">{item.name}</span></div>
-                <div className="price">{item.price}</div>
-                <div className="card-actions">
-                    <button className="quick-view-btn">Quick View</button>
-                    <button className="add-to-cart" onClick={updateCart}>Add to Cart</button>
-                </div>
-
-              </div>
-            ))}
-        </div>
-
-        {/* Promotional Banners */}
-        <div className="promo-wrap">
-            <div className="promo-left">
-                <div className="promo" style={{background:"#f8f5e6"}}>
-                    <h3>Where Dreams Meet Couture</h3>
-                    <p className="small">Ethereal Elegance</p>
-                    <a className="btn" href="#shop">Shop Now</a>
-                </div>
-                <div className="promo" style={{background:"#fffcdc"}}>
-                    <h3>Enchanting Styles for Every Woman</h3>
-                    <p className="small">Radiant Revere</p>
-                    <a className="btn" href="#shop">Shop Now</a>
-                </div>
+            {/* Product Grid */}
+            <div className='grid'>
+                {products.map((item) => (
+                  <div className='card' key={item.id}>
+                    <div>
+                      <img src={item.image} alt={item.description} />
+                      <button 
+                        className={`favorite-btn ${favorites.has(item.id) ? 'favorited' : ''}`}
+                        onClick={() => toggleFavorite(item.id)}
+                      >
+                        {favorites.has(item.id) ? '❤️' : '♡'}
+                      </button>
+                    </div>
+                    <div className="title">JACKETS<span className="small">{item.name}</span></div>
+                    <div className="price">${item.price}</div>
+                    <div className="card-actions">
+                        <button className="quick-view-btn">Quick View</button>
+                        <button className="add-to-cart" onClick={updateCart}>Add to Cart</button>
+                    </div>
+                  </div>
+                ))}
             </div>
 
             <div className="promo promo-large" style={{background: "#f0edd9"}}>
@@ -165,20 +170,22 @@ function LandingPage() {
                 <div className="discount-badge">50%</div>
                 <a className="btn" href="#shop">Shop Now</a>
             </div>
-        </div>
-    </section>
+        </section>
 
-    {/* Newsletter Section */}
-    <section className="newsletter">
-        <div className="newsletter-content">
-            <h3>Stay Updated</h3>
-            <p>Subscribe to get special offers, free giveaways, and new arrivals</p>
-            <form className="newsletter-form">
-                <input type="email" placeholder="Enter your email" required/>
-                <button type="submit">Subscribe</button>
-            </form>
-        </div>
-    </section>
+        {/* Newsletter Section */}
+        <section className="newsletter">
+            <div className="newsletter-content">
+                <h3>Stay Updated</h3>
+                <p>Subscribe to get special offers, free giveaways, and new arrivals</p>
+                <form className="newsletter-form">
+                    <input type="email" placeholder="Enter your email" required/>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </section>
+        {notification && (
+            <Notification message={notification} onClose={() => setNotification(null)} />
+        )}
     </>
   )
 }

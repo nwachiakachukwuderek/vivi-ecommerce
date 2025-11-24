@@ -28,7 +28,7 @@
     { 
       "id": 5, "name": "Adidas X Pop SL Cap", 
       "price": 59.00, 
-      "image": "", 
+      "image": "./img/f4.jpg", 
       "description": "adidas X Pop SL Cap, navy / white" },
     { 
       "id": 6, 
@@ -40,7 +40,7 @@
       "id": 7, 
       "name": "Parra Rug Pull T-shirt", 
       "price": 60.00, 
-      "image": "", 
+      "image": "hhhhhhh", 
       "description": "Parra Rug Pull t-shirt, white" },
    { 
     "id": 8, 
