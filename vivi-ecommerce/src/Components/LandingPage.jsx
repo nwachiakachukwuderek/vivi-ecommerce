@@ -4,7 +4,8 @@ import products from './products.json'
 import Notification from './Notification'
 
 function LandingPage() {
-  const [cartNumber, setCartNumber] = useState(0);
+  // store cart items with quantity so we know exactly what was added
+  const [cartItems, setCartItems] = useState([]); // array of { id, name, price, image, quantity }
   const [notification, setNotification] = useState(null); 
   const [isActive, setIsActive] = useState(false);
   const [favorites, setFavorites] = useState(new Set());
@@ -13,12 +14,23 @@ function LandingPage() {
     setNotification(message);
   }
 
-  function updateCart() {
-    setCartNumber(prev => prev + 1)
-    showNotification('Product added to cart!')
+  // add item object (from products) to cart, increment quantity if present
+  function updateCart(item) {
+    setCartItems(prev => {
+      const existing = prev.find(p => p.id === item.id);
+      if (existing) {
+        return prev.map(p => p.id === item.id ? { ...p, quantity: p.quantity + 1 } : p);
+      }
+      return [...prev, { id: item.id, name: item.name, price: item.price, image: item.image, quantity: 1 }];
+    });
+    showNotification(`${item.name} added to cart!`);
   }
 
-  function toggleFavorite(id)  {
+  function removeFromCart(id) {
+    setCartItems(prev => prev.filter(p => p.id !== id));
+  }
+
+  const toggleFavorite = (id) => {
     const updatedFavorites = new Set(favorites);
     if (updatedFavorites.has(id)) {
         updatedFavorites.delete(id);
@@ -31,23 +43,40 @@ function LandingPage() {
   const baseClass = 'cart-overlay'
   const openCart = isActive ? `active ${baseClass}` : baseClass
 
+  // derived values
+  const cartNumber = cartItems.reduce((s, i) => s + (i.quantity || 0), 0);
+  const cartTotal = cartItems.reduce((s, i) => s + (i.price || 0) * (i.quantity || 0), 0).toFixed(2);
+
   return (
     <>
         {/* Cart Sidebar */}
         <div id="cartOverlay" className={openCart}>
             <div className="cart-sidebar">
                 <div className="cart-header">
-                    <h3>Your Cart (<span id="cartCount">0</span>)</h3>
+                    <h3>Your Cart (<span id="cartCount">{cartNumber}</span>)</h3>
                     <button className="close-cart" onClick={() => setIsActive(false)}>×</button>
                 </div>
                 
                 <div className="cart-items" id="cartItems">
-                    <p className="empty-cart">Your cart is empty</p>
+                    {cartItems.length === 0 ? (
+                      <p className="empty-cart">Your cart is empty</p>
+                    ) : (
+                      cartItems.map(ci => (
+                        <div className="cart-item" key={ci.id}>
+                          <img src={ci.image} alt={ci.name} />
+                          <div className='item-details'>
+                            <h4>{ci.name}</h4>
+                            <div className="small">Qty: {ci.quantity} • ${ (ci.price * ci.quantity).toFixed(2) }</div>
+                          </div>
+                          <button className="remove-item" onClick={() => removeFromCart(ci.id)}>x</button>
+                        </div>
+                      ))
+                    )}
                 </div>
                 
                 <div className="cart-footer">
                     <div className="cart-total">
-                        <strong>Total: $<span id="cartTotal">0.00</span></strong>
+                        <strong>Total: $<span id="cartTotal">{cartTotal}</span></strong>
                     </div>
                     <button className="checkout-btn">
                         Proceed to Checkout
@@ -159,7 +188,7 @@ function LandingPage() {
                     <div className="price">${item.price}</div>
                     <div className="card-actions">
                         <button className="quick-view-btn">Quick View</button>
-                        <button className="add-to-cart" onClick={updateCart}>Add to Cart</button>
+                        <button className="add-to-cart" onClick={() => updateCart(item)}>Add to Cart</button>
                     </div>
                   </div>
                 ))}
