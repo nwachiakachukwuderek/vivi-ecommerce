@@ -6,16 +6,12 @@ import './style.css'
 import products from './products.json'
 
 function LandingPage() {
-  const [cartNumber, setCartNumber] = useState(0)
+  const [cartNumber, setCartNumber] = useState(2)
   // const [index, setIndex] = useState(0)
 
   function updateCart() {
     setCartNumber(cartNumber + 1)
   }
-
-  products.map((item) => {
-    console.log(item)
-  })
 
   return (
     <>
@@ -24,7 +20,7 @@ function LandingPage() {
     <div id="cartOverlay" className="cart-overlay">
         <div className="cart-sidebar">
             <div className="cart-header">
-                <h3>Your Cart (<span id="cartCount">{cartNumber}</span>)</h3>
+                <h3>Your Cart (<span id="cartCount">0</span>)</h3>
                 <button className="close-cart">×</button>
             </div>
             
@@ -77,7 +73,7 @@ function LandingPage() {
                 ♡ <span className="favorite-count">0</span>
             </div>
             <div className="small icon-btn">👤</div>
-            <div className="badge icon-btn cart-btn">0</div>
+            <div className="badge icon-btn cart-btn">{cartNumber}</div>
         </div>
         
         {/* Search Bar */}
@@ -142,7 +138,7 @@ function LandingPage() {
                 <div className="price">{item.price}</div>
                 <div className="card-actions">
                     <button className="quick-view-btn">Quick View</button>
-                    <button className="add-to-cart">Add to Cart</button>
+                    <button className="add-to-cart" onClick={updateCart}>Add to Cart</button>
                 </div>
 
               </div>
