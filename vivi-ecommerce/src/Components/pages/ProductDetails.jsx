@@ -6,12 +6,14 @@ import products from '../products.json';
 
 
 function ProductDetails() {
-    const { productId } = useParams();
+    const { Id } = useParams();
+    const numericId = parseInt(Id)
 
-    const product = products.find(p => p.id === productId)
+    const product = products.find(p => p.id == numericId)
 
     if (!product) {
-        return <h1>404 NOT FOUND{productId}</h1>
+        return <h1>404 NOT FOUND{Id}</h1>
+        
     }
   return (
     <>
@@ -266,132 +268,6 @@ function ProductDetails() {
         </div>
     </section>
 
-        {/* Store Features */}
-    <section className="store-features">
-        <div className="features-grid">
-            <div className="feature-item">
-                <div className="feature-icon">🚚</div>
-                <h4>Free Shipping</h4>
-                <p>Free delivery on orders over $50</p>
-            </div>
-            <div className="feature-item">
-                <div className="feature-icon">↩️</div>
-                <h4>Easy Returns</h4>
-                <p>30-day return policy</p>
-            </div>
-            <div className="feature-item">
-                <div className="feature-icon">🔒</div>
-                <h4>Secure Payment</h4>
-                <p>100% secure payment processing</p>
-            </div>
-            <div className="feature-item">
-                <div className="feature-icon">💝</div>
-                <h4>Quality Guarantee</h4>
-                <p>Premium quality products</p>
-            </div>
-        </div>
-    </section>
-
-    {/* Newsletter Section */}
-    <section className="newsletter">
-        <div className="newsletter-content">
-            <h3>Stay Updated</h3>
-            <p>Subscribe to get special offers, free giveaways, and new arrivals</p>
-            <form className="newsletter-form">
-                <input type="email" placeholder="Enter your email" required/>
-                <button type="submit">Subscribe</button>
-            </form>
-        </div>
-    </section>
-
-    {/* Footer */}
-    <footer className="footer">
-        <div className="footer-content">
-            {/* Brand Section */}
-            <div className="footer-brand">
-                <h3>Mixtas</h3>
-                <p>Discover contemporary fashion crafted for modern comfort and style. We bring you the latest trends with quality you can trust.</p>
-                <div className="social-links">
-                    <a href="#" className="social-link" aria-label="Facebook">📘</a>
-                    <a href="#" className="social-link" aria-label="Instagram">📷</a>
-                    <a href="#" className="social-link" aria-label="Twitter">🐦</a>
-                    <a href="#" className="social-link" aria-label="Pinterest">📌</a>
-                </div>
-            </div>
-
-            {/* Quick Links */}
-            <div className="footer-section">
-                <h4>Quick Links</h4>
-                <ul className="footer-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="index.html#shop">Shop</a></li>
-                    <li><a href="index.html#new-arrivals">New Arrivals</a></li>
-                    <li><a href="index.html#blog">Blog</a></li>
-                    <li><a href="index.html#contact">Contact Us</a></li>
-                </ul>
-            </div>
-
-            {/* Customer Service */}
-            <div className="footer-section">
-                <h4>Customer Service</h4>
-                <ul className="footer-links">
-                    <li><a href="#">Shipping Information</a></li>
-                    <li><a href="#">Returns & Exchanges</a></li>
-                    <li><a href="#">Size Guide</a></li>
-                    <li><a href="#">FAQs</a></li>
-                    <li><a href="#">Track Your Order</a></li>
-                </ul>
-            </div>
-
-            {/* Contact Info */}
-            <div className="footer-section">
-                <h4>Contact Us</h4>
-                <ul className="contact-info">
-                    <li>
-                        <span className="icon">📍</span>
-                        <span>123 Fashion Street, Style City, SC 12345</span>
-                    </li>
-                    <li>
-                        <span className="icon">📞</span>
-                        <span>+1 (555) 123-4567</span>
-                    </li>
-                    <li>
-                        <span className="icon">✉️</span>
-                        <span>hello@mixtas.com</span>
-                    </li>
-                    <li>
-                        <span className="icon">🕒</span>
-                        <span>Mon-Fri: 9AM-6PM EST</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <div className="footer-bottom">
-            <div className="footer-bottom-content">
-                <div className="copyright">
-                    &copy; 2024 Mixtas. All rights reserved.
-                </div>
-                <ul className="footer-bottom-links">
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Cookie Policy</a></li>
-                </ul>
-                <div className="payment-methods">
-                    <span>We Accept:</span>
-                    <div className="payment-icons">
-                        <div className="payment-icon">VISA</div>
-                        <div className="payment-icon">MC</div>
-                        <div className="payment-icon">PP</div>
-                        <div className="payment-icon">AE</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    {/* Back to Top Button */}
-    <button className="back-to-top">↑</button>
     </>
   )
 }

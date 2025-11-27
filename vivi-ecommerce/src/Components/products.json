@@ -1,6 +1,6 @@
 [ 
    {
-        "id": 1,
+        "id": 11,
         "name": "Adidas X Pop Polo Shirt",
         "price": 69.99,
         "originalPrice": 89.99,
@@ -37,7 +37,7 @@
     },
 
   {
-        "id": 2,
+        "id": 12,
         "name": "Adidas X Pop TRX Vintage",
         "price": 69.99,
         "originalPrice": 79.99,
@@ -72,7 +72,7 @@
     },
 
   {
-        "id": 3,
+        "id": 13,
         "name": "Adidas X Pop Beckenbauer Track Jacket",
         "price": 129.00,
         "originalPrice": 159.00,
@@ -107,7 +107,7 @@
   },
 
   { 
-      "id": 4, 
+      "id": 14, 
       "name": "Adidas X Pop Classic T-shirt", 
       "price": 120.00, 
       "image": "kugvkluhvljkgvlj", 
@@ -115,14 +115,14 @@
   },
 
   { 
-      "id": 5, "name": "Adidas X Pop SL Cap", 
+      "id": 15, "name": "Adidas X Pop SL Cap", 
       "price": 59.00, 
       "image": "./img/f4.jpg", 
       "description": "adidas X Pop SL Cap, navy / white" 
   },
 
   { 
-      "id": 6, 
+      "id": 16, 
       "name": "Butter Yard Pullover Hood", 
       "price": 120.00, 
       "image": "kuhvkuhvkugv", 
@@ -130,7 +130,7 @@
   },
 
   { 
-      "id": 7, 
+      "id": 17, 
       "name": "Parra Rug Pull T-shirt", 
       "price": 60.00, 
       "image": "hhhhhhh", 
@@ -138,7 +138,7 @@
   },
   
   { 
-    "id": 8, 
+    "id": 18, 
     "name": "Carhartt L/S Sweat", 
     "price": 130.00, 
     "image": "kjhblvihvlhiv", 

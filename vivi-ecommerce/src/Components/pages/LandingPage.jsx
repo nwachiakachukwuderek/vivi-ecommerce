@@ -4,7 +4,7 @@ import products from '../products.json'
 import Notification from '../pages/Notification'
 import { Link } from 'react-router'
 
-function LandingPage({product}) {
+function LandingPage() {
   // store cart items with quantity so we know exactly what was added
   const [cartItems, setCartItems] = useState([]); // array of { id, name, price, image, quantity }
   const [notification, setNotification] = useState(null); 
@@ -173,11 +173,11 @@ function LandingPage({product}) {
             </div>
 
             {/* Product Grid */}
-          <Link to={`/products/${product.id}`}>
+  
               <div className='grid'>
                   {products.map((item) => (
-                    
-                    <div className='card' key={item.id}>                      
+                    <div className='card' key={item.id}>   
+                       <Link to={`/products/${item.id}`}>                   
                       <div>
                         <img src={item.image} alt={item.description} />
                         <button 
@@ -193,12 +193,11 @@ function LandingPage({product}) {
                           <button className="quick-view-btn">Quick View</button>
                           <button className="add-to-cart" onClick={() => updateCart(item)}>Add to Cart</button>
                       </div>
+                      </Link>
                     </div>
-
                   ))}
-              </div>
-          
-          </Link>
+              </div>      
+
 
             <div className="promo promo-large" style={{background: "#f0edd9"}}>
                 <h3>Trendsetting Bags for Her</h3>
