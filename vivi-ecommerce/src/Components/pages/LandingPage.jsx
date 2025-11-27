@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import '../styles/style.css'
 import products from '../products.json'
 import Notification from '../pages/Notification'
+import { Link } from 'react-router'
 
-function LandingPage() {
+function LandingPage({product}) {
   // store cart items with quantity so we know exactly what was added
   const [cartItems, setCartItems] = useState([]); // array of { id, name, price, image, quantity }
   const [notification, setNotification] = useState(null); 
@@ -172,27 +173,32 @@ function LandingPage() {
             </div>
 
             {/* Product Grid */}
-            <div className='grid'>
-                {products.map((item) => (
-                  <div className='card' key={item.id}>
-                    <div>
-                      <img src={item.image} alt={item.description} />
-                      <button 
-                        className={`favorite-btn ${favorites.has(item.id) ? 'favorited' : ''}`}
-                        onClick={() => toggleFavorite(item.id)}
-                      >
-                        {favorites.has(item.id) ? '❤️' : '♡'}
-                      </button>
+          <Link to={`/products/${product.id}`}>
+              <div className='grid'>
+                  {products.map((item) => (
+                    
+                    <div className='card' key={item.id}>                      
+                      <div>
+                        <img src={item.image} alt={item.description} />
+                        <button 
+                          className={`favorite-btn ${favorites.has(item.id) ? 'favorited' : ''}`}
+                          onClick={() => toggleFavorite(item.id)}
+                        >
+                          {favorites.has(item.id) ? '❤️' : '♡'}
+                        </button>
+                      </div>
+                      <div className="title">JACKETS<span className="small">{item.name}</span></div>
+                      <div className="price">${item.price}</div>
+                      <div className="card-actions">
+                          <button className="quick-view-btn">Quick View</button>
+                          <button className="add-to-cart" onClick={() => updateCart(item)}>Add to Cart</button>
+                      </div>
                     </div>
-                    <div className="title">JACKETS<span className="small">{item.name}</span></div>
-                    <div className="price">${item.price}</div>
-                    <div className="card-actions">
-                        <button className="quick-view-btn">Quick View</button>
-                        <button className="add-to-cart" onClick={() => updateCart(item)}>Add to Cart</button>
-                    </div>
-                  </div>
-                ))}
-            </div>
+
+                  ))}
+              </div>
+          
+          </Link>
 
             <div className="promo promo-large" style={{background: "#f0edd9"}}>
                 <h3>Trendsetting Bags for Her</h3>

@@ -1,8 +1,18 @@
 import React from 'react'
 import '../styles/productdetails.css'
 import '../styles/style.css'
+import { useParams } from 'react-router-dom'
+import products from '../products.json';
+
 
 function ProductDetails() {
+    const { productId } = useParams();
+
+    const product = products.find(p => p.id === productId)
+
+    if (!product) {
+        return <h1>404 NOT FOUND{productId}</h1>
+    }
   return (
     <>
     {/* Cart Sidebar */}
@@ -106,7 +116,7 @@ function ProductDetails() {
 
                 {/* Product Info */}
                 <div className="product-info">
-                    <h1 id="productTitle">Product Title</h1>
+                    <h1 id="productTitle">{product.name}</h1>
                     <div className="price-section">
                         <span className="current-price" id="currentPrice">$0.00</span>
                         <span className="original-price" id="originalPrice"></span>
