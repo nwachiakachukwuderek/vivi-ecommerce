@@ -1,11 +1,12 @@
-import React from 'react'
-import '../styles/productdetails.css'
-import '../styles/style.css'
-import { useParams } from 'react-router-dom'
+import React, { useState } from 'react';
+import '../styles/productdetails.css';
+import '../styles/style.css';
+import { useParams } from 'react-router-dom';
 import products from '../products.json';
 
 
 function ProductDetails() {
+    const [activeTab, setActiveTab] = useState('description');
     const { Id } = useParams();
     const numericId = parseInt(Id)
 
@@ -15,6 +16,14 @@ function ProductDetails() {
         return <h1>404 NOT FOUND{Id}</h1>
         
     }
+
+    // --- added: active tab state and handler ---
+  
+    const handleTabClick = (tabId) => {
+      setActiveTab(tabId);
+      // optionally scroll into view or other actions
+    };
+    // --- end added ---
   return (
     <>
     {/* Cart Sidebar */}
@@ -120,8 +129,8 @@ function ProductDetails() {
                 <div className="product-info">
                     <h1 id="productTitle">{product.name}</h1>
                     <div className="price-section">
-                        <span className="current-price" id="currentPrice">$0.00</span>
-                        <span className="original-price" id="originalPrice"></span>
+                        <span className="current-price" id="currentPrice">${product.price}</span>
+                        <span className="original-price" id="originalPrice">${product.originalPrice}</span>
                         <span className="discount-badge" id="discountBadge"></span>
                     </div>
                     
@@ -133,7 +142,7 @@ function ProductDetails() {
                     </div>
 
                     <p className="product-description" id="productDescription">
-                        Product description will appear here...
+                        {product.description}
                     </p>
 
                     {/* Size Selection */}
@@ -194,26 +203,46 @@ function ProductDetails() {
             {/* Product Tabs */}
             <div className="product-tabs">
                 <div className="tab-headers">
-                    <button className="tab-header active">Description</button>
-                    <button className="tab-header">Specifications</button>
-                    <button className="tab-header">Reviews</button>
-                    <button className="tab-header">Shipping & Returns</button>
+                    <button
+                      className={`tab-header${activeTab === 'description' ? ' active' : ''}`}
+                      onClick={() => handleTabClick('description')}
+                    >
+                      Description
+                    </button>
+                    <button
+                      className={`tab-header${activeTab === 'specifications' ? ' active' : ''}`}
+                      onClick={() => handleTabClick('specifications')}
+                    >
+                      Specifications
+                    </button>
+                    <button
+                      className={`tab-header${activeTab === 'reviews' ? ' active' : ''}`}
+                      onClick={() => handleTabClick('reviews')}
+                    >
+                      Reviews
+                    </button>
+                    <button
+                      className={`tab-header${activeTab === 'shipping' ? ' active' : ''}`}
+                      onClick={() => handleTabClick('shipping')}
+                    >
+                      Shipping & Returns
+                    </button>
                 </div>
 
                 <div className="tab-content">
-                    <div id="description" className="tab-pane active">
+                    <div id="description" className={`tab-pane${activeTab === 'description' ? ' active' : ''}`}>
                         <h3>Product Description</h3>
-                        <p id="fullDescription">Full product description will appear here...</p>
+                        <p id="fullDescription">{product.fullDescription}</p>
                     </div>
 
-                    <div id="specifications" className="tab-pane">
+                    <div id="specifications" className={`tab-pane${activeTab === 'specifications' ? ' active' : ''}`}>
                         <h3>Product Specifications</h3>
                         <div className="specs-grid" id="specsGrid">
                             {/* Specifications will be populated by JavaScript */}
                         </div>
                     </div>
 
-                    <div id="reviews" className="tab-pane">
+                    <div id="reviews" className={`tab-pane${activeTab === 'reviews' ? ' active' : ''}`}>
                         <h3>Customer Reviews</h3>
                         <div className="reviews-summary">
                             <div className="average-rating">
@@ -235,7 +264,7 @@ function ProductDetails() {
                         </div>
                     </div>
 
-                    <div id="shipping" className="tab-pane">
+                    <div id="shipping" className={`tab-pane${activeTab === 'shipping' ? ' active' : ''}`}>
                         <h3>Shipping & Returns</h3>
                         <div className="shipping-info">
                             <h4>Shipping Information</h4>
